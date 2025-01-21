@@ -1,0 +1,35 @@
+/**
+ * A 16-bit counter with load and reset control bits.
+ * if      (reset[t] == 1) out[t+1] = 0
+ * else if (load[t] == 1)  out[t+1] = in[t]
+ * else if (inc[t] == 1)   out[t+1] = out[t] + 1  (integer addition)
+ * else                    out[t+1] = out[t]
+ * 
+ * Author: Naga Kandasamy
+ * Date created: July 14, 2020
+ * Date modified: October 4, 2024
+ * 
+ * Student name(s): Ricky Chen
+ * Date modified: October 5, 2024 
+ *
+ * Notes: Project from the book "The Elements of Computing Systems" by Nisan and Schocken, MIT Press.
+ */
+
+CHIP PC {
+    IN in[16], load, inc, reset;
+    OUT out[16];
+
+    PARTS:
+    // TODO: complete implementation of the 16-bit program counter.
+    Not(in=inc, out=not0);
+    Or(a=not0, b=load, out=sel0);
+    Mux16(a=newpc, b=in, sel=sel0, out=z0);
+
+    Mux16(a=z0, b=false, sel=reset, out=z1);
+
+    Or(a=reset, b=inc, out=or0);
+    Or(a=or0, b=load, out=or1);
+    Register(in=z1, load=or1, out=oldpc, out=out);
+
+    Inc16(in=oldpc, out=newpc);
+}

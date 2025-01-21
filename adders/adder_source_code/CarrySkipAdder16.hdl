@@ -1,0 +1,41 @@
+/**
+ * 16-bit carry-skip adder constructed using four 4-bit ripple-carry adders.
+ * Author: Naga Kandasamy
+ * Date created: September 27, 2024
+ * 
+ * Student name(s): Ricky Chen, Phong Nguyen
+ * Date modified: October 3, 2024
+ */
+
+ CHIP CarrySkipAdder16 {
+    IN x[16], y[16];    // 16-bit inputs
+    OUT z[16];          //  16-bit output
+
+    PARTS: 
+    // FIXME: provide your solution
+    RippleCarryAdder4(x=x[0..3], y=y[0..3], z=z[0..3], cout=c0);
+
+    Or(a=x[4], b=y[4], out=tmp4 );
+    Or(a=x[5], b=y[5], out=tmp5 );
+    Or(a=x[6], b=y[6], out=tmp6 );
+    Or(a=x[7], b=y[7], out=tmp7 );
+    And(a=tmp4, b=tmp5, out=tmp16);
+    And(a=tmp6, b=tmp7, out=tmp17);
+    And(a=tmp16, b=tmp17, out=p1);
+    RippleCarryAdder4(x=x[4..7], y=y[4..7], cin=c0, z=z[4..7], cout=c1);
+    And(a=p1, b=c0, out=tmp18);
+    Or(a=tmp18, b=c1, out=tmp19);
+
+    Or(a=x[8], b=y[8], out=tmp8 );
+    Or(a=x[9], b=y[9], out=tmp9 );
+    Or(a=x[10], b=y[10], out=tmp10 );
+    Or(a=x[11], b=y[11], out=tmp11 );
+    And(a=tmp8, b=tmp9, out=tmp20);
+    And(a=tmp10, b=tmp11, out=tmp21);
+    And(a=tmp20, b=tmp21, out=p2);
+    RippleCarryAdder4(x=x[8..11], y=y[8..11], cin=tmp19, z=z[8..11], cout=c2);
+    And(a=p2, b=tmp19, out=tmp22);
+    Or(a=tmp22, b=c2, out=tmp23);
+
+    RippleCarryAdder4(x=x[12..15], y=y[12..15], cin=tmp23, z=z[12..15], cout=trash);
+}

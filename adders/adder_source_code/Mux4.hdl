@@ -1,0 +1,21 @@
+/**
+ * 4-bit 2x1 Mux constructed using 1-bit 2x1 Muxes.
+ * Author: Naga Kandasamy
+ * Date created: July 9, 2020
+ * Date modified: September 12, 2021
+ * 
+ * Student name(s): Ricky Chen, Phong Nguyen
+ * Date modified: October 3, 2024
+ */
+
+ CHIP Mux4 {
+    IN x[4], y[4], sel;    // 4-bit inputs
+    OUT z[4];          //  4-bit output
+
+    PARTS: 
+    // FIXME: provide your solution
+    Mux(a=x[0], b=y[0], sel=sel, out=z[0]);
+    Mux(a=x[1], b=y[1], sel=sel, out=z[1]);
+    Mux(a=x[2], b=y[2], sel=sel, out=z[2]);
+    Mux(a=x[3], b=y[3], sel=sel, out=z[3]);
+}

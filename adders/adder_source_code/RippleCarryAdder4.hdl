@@ -1,0 +1,21 @@
+/**
+ * 4-bit ripple carry adder constructed using full adders.
+ * Author: Naga Kandasamy
+ * Date created: June 29, 2020
+ * Date modified: September 12, 2021
+ * 
+ * Student name(s): Ricky Chen, Phong Nguyen
+ * Date modified: October 3, 2024
+ */
+
+CHIP RippleCarryAdder4 {
+    IN x[4], y[4], cin;     // 4-bit inputs
+    OUT z[4], cout;         // 4-bit output, 1 carry out bit
+
+    PARTS: 
+    // FIXME: provide your solution
+    FullAdder(x=x[0], y=y[0], cin=cin, z=z[0], cout=tmp0);
+    FullAdder(x=x[1], y=y[1], cin=tmp0, z=z[1], cout=tmp1);
+    FullAdder(x=x[2], y=y[2], cin=tmp1, z=z[2], cout=tmp2);
+    FullAdder(x=x[3], y=y[3], cin=tmp2, z=z[3], cout=cout);
+}

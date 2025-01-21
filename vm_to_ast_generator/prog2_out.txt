@@ -1,0 +1,16 @@
+function prog2 4
+push constant 5
+pop local 0
+push constant 10
+pop local 1
+push local 0
+push local 0
+push local 1
+call mult 2
+call add 2
+pop local 2
+push local 0
+push local 2
+call add 2
+pop local 3
+return
